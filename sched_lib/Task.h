@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <cstring>
 #include <string>
 #include <stdio.h>
@@ -7,17 +7,17 @@ using std::string;
 
 
 
-// задание с кратким сроком
+// Р·Р°РґР°РЅРёРµ СЃ РєСЂР°С‚РєРёРј СЃСЂРѕРєРѕРј
 class Task {
-	string id; // строковый идентификатор задания
-	string text; // текст задания
-	int importance; // уровень важности
-	int deadline; // крайний срок исполнения
+	string id; // СЃС‚СЂРѕРєРѕРІС‹Р№ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ Р·Р°РґР°РЅРёСЏ
+	string text; // С‚РµРєСЃС‚ Р·Р°РґР°РЅРёСЏ
+	int importance; // СѓСЂРѕРІРµРЅСЊ РІР°Р¶РЅРѕСЃС‚Рё
+	int deadline; // РєСЂР°Р№РЅРёР№ СЃСЂРѕРє РёСЃРїРѕР»РЅРµРЅРёСЏ
 public:
-	// создание задания
+	// СЃРѕР·РґР°РЅРёРµ Р·Р°РґР°РЅРёСЏ
 	Task(const string& id, const string& text, int deadline, int importance) :
 		deadline(deadline), importance(importance), id(id), text(text) {};
-	bool extend_deadline(int dt) // продление срока исполнения
+	bool extend_deadline(int dt) // РїСЂРѕРґР»РµРЅРёРµ СЃСЂРѕРєР° РёСЃРїРѕР»РЅРµРЅРёСЏ
 	{
 		if (dt > 0)
 		{
@@ -27,7 +27,7 @@ public:
 		else return false;
 
 	}
-	bool change_level(int lvl) //изменение уровня важности задания
+	bool change_level(int lvl) //РёР·РјРµРЅРµРЅРёРµ СѓСЂРѕРІРЅСЏ РІР°Р¶РЅРѕСЃС‚Рё Р·Р°РґР°РЅРёСЏ
 	{
 		if (lvl > 0)
 		{
@@ -37,7 +37,7 @@ public:
 		else
 			return false;
 	}
-	virtual void print() const // печать информации о задании
+	virtual void print() const // РїРµС‡Р°С‚СЊ РёРЅС„РѕСЂРјР°С†РёРё Рѕ Р·Р°РґР°РЅРёРё
 	{
 		printf("------\n");
 		printf("ID: %s\nText: %s\ndeadline - %ds, importance level - %d \n", id.c_str(), text.c_str(), deadline, importance);
@@ -52,7 +52,7 @@ public:
 	{
 		return importance;
 	}
-	virtual bool exec() // выполнить задание
+	virtual bool exec() // РІС‹РїРѕР»РЅРёС‚СЊ Р·Р°РґР°РЅРёРµ
 	{
 		this->print();
 		printf("Executed.\n\n");

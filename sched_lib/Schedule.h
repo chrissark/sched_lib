@@ -1,18 +1,18 @@
-#pragma once
+п»ї#pragma once
 #include <string>
 #include <memory>
 #include "PeriodicTask.h"
 #include "Task.h"
 using std::string;
 
-// План (бинарное дерево, прошитое по возрастанию ключа)
+// РџР»Р°РЅ (Р±РёРЅР°СЂРЅРѕРµ РґРµСЂРµРІРѕ, РїСЂРѕС€РёС‚РѕРµ РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ РєР»СЋС‡Р°)
 class Schedule {
-	// узел бинарного дерева
+	// СѓР·РµР» Р±РёРЅР°СЂРЅРѕРіРѕ РґРµСЂРµРІР°
 	typedef struct Node {
 		Task* task;
-		int time; // планируемое время исполнения
+		int time; // РїР»Р°РЅРёСЂСѓРµРјРѕРµ РІСЂРµРјСЏ РёСЃРїРѕР»РЅРµРЅРёСЏ
 		Node* left, * right;
-		bool right_is_thread; // обычный указатель или указатель прошивки
+		bool right_is_thread; // РѕР±С‹С‡РЅС‹Р№ СѓРєР°Р·Р°С‚РµР»СЊ РёР»Рё СѓРєР°Р·Р°С‚РµР»СЊ РїСЂРѕС€РёРІРєРё
 	}Node;
 	Node* root;
 public:
@@ -20,10 +20,10 @@ public:
 		root(nullptr) { };
 	void add_node(Task* t, int time);
 	void print_node(Node* p) const;
-	void print_Schedule() const; // вывести план (для пользователя)
-	void show(Node* p) const; // вывести план
-	void execute_task(); //выполнить задание 
-	bool is_empty() const; //проверка на то, есть ли в плане задания
+	void print_Schedule() const; // РІС‹РІРµСЃС‚Рё РїР»Р°РЅ (РґР»СЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ)
+	void show(Node* p) const; // РІС‹РІРµСЃС‚Рё РїР»Р°РЅ
+	void execute_task(); //РІС‹РїРѕР»РЅРёС‚СЊ Р·Р°РґР°РЅРёРµ 
+	bool is_empty() const; //РїСЂРѕРІРµСЂРєР° РЅР° С‚Рѕ, РµСЃС‚СЊ Р»Рё РІ РїР»Р°РЅРµ Р·Р°РґР°РЅРёСЏ
 	void deleteSchedule(Node* p);
 	~Schedule();
 

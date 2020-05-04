@@ -1,12 +1,12 @@
-#pragma once
+п»ї#pragma once
 #include <string>
 #include "Task.h"
 using std::string;
 
-//задания для периодического выполнения
+//Р·Р°РґР°РЅРёСЏ РґР»СЏ РїРµСЂРёРѕРґРёС‡РµСЃРєРѕРіРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ
 class PeriodicTask : public Task {
-	// поле deadline - метка ближайшего выполнения
-	int period; // число секунд между запланированными исполнениями
+	// РїРѕР»Рµ deadline - РјРµС‚РєР° Р±Р»РёР¶Р°Р№С€РµРіРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ
+	int period; // С‡РёСЃР»Рѕ СЃРµРєСѓРЅРґ РјРµР¶РґСѓ Р·Р°РїР»Р°РЅРёСЂРѕРІР°РЅРЅС‹РјРё РёСЃРїРѕР»РЅРµРЅРёСЏРјРё
 public:
 
 	PeriodicTask(const string& id, const string& text, int deadline, int importance, int period)
@@ -17,12 +17,12 @@ public:
 		return period;
 	};
 
-	void skip_task() // пропуск очередного выполнения задания
+	void skip_task() // РїСЂРѕРїСѓСЃРє РѕС‡РµСЂРµРґРЅРѕРіРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°РЅРёСЏ
 	{
 		extend_deadline(period);
 	}
 
-	virtual void print() const // печать информации о периодическом задании
+	virtual void print() const // РїРµС‡Р°С‚СЊ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РїРµСЂРёРѕРґРёС‡РµСЃРєРѕРј Р·Р°РґР°РЅРёРё
 	{
 		this->Task::print();
 		printf("Period: %i\n", period);
