@@ -23,10 +23,6 @@ extern "C"
 		return t->skip_task();
 	}
 
-	void printPeriodicTask(PeriodicTask* t)
-	{
-		return t->print();
-	}
 
 	bool execPeriodic(PeriodicTask* t)
 	{

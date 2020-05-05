@@ -191,10 +191,7 @@ extern "C"
 	{
 		return new Schedule();
 	}
-	void printSchedule(Schedule* S)
-	{
-		return S->print_Schedule();
-	}
+
 	bool is_empty(Schedule* S)
 	{
 		return S->is_empty();
@@ -206,9 +203,5 @@ extern "C"
 	void deleteSchedule(Schedule* S)
 	{
 		delete S;
-	}
-	void add_node(Task* t, int time, Schedule* S)
-	{
-		return S->add_node(t, time);
 	}
 }

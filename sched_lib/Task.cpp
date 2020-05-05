@@ -25,11 +25,6 @@ extern "C"
 		return t->get_importance();
 	}
 
-	void printTask(Task* t)
-	{
-		return t->print();
-	}
-
 	bool extend_deadline(Task* t, int dt)
 	{
 		return t->extend_deadline(dt);
