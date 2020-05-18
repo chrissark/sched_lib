@@ -13,10 +13,6 @@ extern "C"
 		return new PeriodicTask(id, text, deadline, importance, period);
 	}
 
-	int get_period(PeriodicTask* t)
-	{
-		return t->get_period();
-	}
 
 	void skip_task(PeriodicTask* t)
 	{

@@ -2,8 +2,10 @@
 #include <cstring>
 #include <string>
 #include <stdio.h>
+#include <iostream>
 
 using std::string;
+using std::cout;
 
 
 
@@ -39,9 +41,9 @@ public:
 	}
 	virtual void print() const // печать информации о задании
 	{
-		printf("------\n");
-		printf("ID: %s\nText: %s\ndeadline - %ds, importance level - %d \n", id.c_str(), text.c_str(), deadline, importance);
-		printf("------\n");
+		cout<<"------\n";
+		cout<<id<<text<<deadline<<importance;
+		cout<<"------\n";
 	}
 
 	int get_deadline() const
@@ -52,6 +54,22 @@ public:
 	{
 		return importance;
 	}
+
+	virtual int get_period() const
+	{
+		return 0;
+	}
+
+	const string& get_text() const
+	{
+		return text;
+	}
+
+	const string& get_id() const
+	{
+		return id;
+	}
+
 	virtual bool exec() // выполнить задание
 	{
 		this->print();

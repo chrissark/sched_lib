@@ -25,4 +25,15 @@ extern "C"
 	{
 		delete S;
 	}
+
+	Task* get_task(Scheduler* S, int num)
+	{
+		return S->get_task(num);
+	}
+
+	int get_list_size(Scheduler* S)
+	{
+		return S->get_list_size();
+	}
+
 }

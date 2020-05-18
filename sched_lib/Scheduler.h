@@ -22,6 +22,21 @@ public:
 		set.insert(std::make_pair(t->get_importance(), shared_ptr<Task>(t)));
 	}
 
+	Task* get_task(int num) const
+	{
+		int k = 0;
+		for (auto itr = set.rbegin(); itr != set.rend(); ++itr, k++)
+		{
+			if (itr != set.rend() && (k == num))
+			return itr->second.get();
+		}
+	}
+
+	int get_list_size() const
+	{
+		return set.size();
+	}
+
 	Schedule* make_schedule() const // составить расписание из набора заданий
 	{
 		int N = set.size();

@@ -1,6 +1,9 @@
 ﻿#include "Schedule.h"
 #include "TaskLib.h"
 #include "pch.h"
+#include <vector>
+
+using std::vector;
 
 
 void Schedule::add_node(Task* t, int time)
@@ -88,7 +91,7 @@ void Schedule::show(Node* p) const
 	//проход по прошивке, пока она не кончится
 	while (p)
 	{
-		print_node(p);
+		//get_data(p);
 		if (p->right_is_thread)
 		{
 			p = p->right;
@@ -108,13 +111,13 @@ void Schedule::show(Node* p) const
 
 
 //выполнение задания
-void Schedule::execute_task()
+Task* Schedule::execute_task()
 {
 	Node* p = root;
 	Node* parent = p;
 
 	if (is_empty())
-		return;
+		return nullptr;
 
 	//ищем элемент с наименьшим ключом
 	while (p->left)
@@ -128,6 +131,14 @@ void Schedule::execute_task()
 	{
 		add_node(p->task, p->task->get_deadline());
 	}
+	Task* ret = p->task;
+	delete_executed_task(p, parent);
+	return ret;
+
+}
+
+void Schedule::delete_executed_task(Node* p, Node* parent)
+{
 	//удаление задания из списка
 	if (p->right_is_thread)
 	{
@@ -144,8 +155,6 @@ void Schedule::execute_task()
 		parent->left = p->right;
 		delete p;
 	}
-
-
 }
 
 bool Schedule::is_empty() const
@@ -158,14 +167,6 @@ bool Schedule::is_empty() const
 	else return false;
 }
 
-void Schedule::print_node(Node* p) const
-{
-	p->task->print();
-	printf("Execution time: %i\n", p->time);
-	if (p->right_is_thread)
-		printf("Right is thread\n");
-	printf("\n\n");
-}
 
 void Schedule::deleteSchedule(Node* p)
 {
@@ -179,6 +180,12 @@ void Schedule::deleteSchedule(Node* p)
 	}
 }
 
+Node* Schedule::get_root() const
+{
+	return root;
+}
+
+
 Schedule::~Schedule()
 {
 	deleteSchedule(root);
@@ -187,19 +194,47 @@ Schedule::~Schedule()
 
 extern "C"
 {
-	Schedule* createSchedule()
-	{
-		return new Schedule();
-	}
+
 
 	bool is_empty(Schedule* S)
 	{
 		return S->is_empty();
 	}
-	void execute_task(Schedule* S)
+	Task* execute_task(Schedule* S)
 	{
 		return S->execute_task();
 	}
+
+	Node* get_root(Schedule *S)
+	{
+		return S->get_root();
+	}
+
+	Node* get_left(Node* p)
+	{
+		return p->left;
+	}
+
+	Node* get_right(Node* p)
+	{
+		return p->right;
+	}
+
+	Task* get_task_from_node(Node* p)
+	{
+		return p->task;
+	}
+
+	int get_exec_time(Node* p)
+	{
+		return p->time;
+	}
+
+	bool right_is_thread(Node* p)
+	{
+		return p->right_is_thread;
+	}
+
 	void deleteSchedule(Schedule* S)
 	{
 		delete S;

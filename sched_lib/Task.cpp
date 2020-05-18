@@ -25,6 +25,21 @@ extern "C"
 		return t->get_importance();
 	}
 
+	int get_period(Task* t)
+	{
+		return t->get_period();
+	}
+
+	void get_id(Task* t, char* name, int max_name_len)
+	{
+		strncpy_s(name, max_name_len, t->get_id().c_str(),  t->get_id().length());
+	}
+
+	void get_text(Task* t, char* name, int max_name_len)
+	{
+		strncpy_s(name, max_name_len, t->get_text().c_str(), t->get_id().length());
+	}
+
 	bool extend_deadline(Task* t, int dt)
 	{
 		return t->extend_deadline(dt);
@@ -43,6 +58,11 @@ extern "C"
 	void deleteTask(Task* t)
 	{
 		delete t;
+	}
+
+	void printTask(Task* t)
+	{
+		t->print();
 	}
 
 
