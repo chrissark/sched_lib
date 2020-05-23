@@ -60,7 +60,7 @@ def show_list(scheduler):
 # печать информации о задании
 def print_info(task):
     task_id = ctypes.create_string_buffer(100)
-    task_text = ctypes.create_string_buffer(100)
+    task_text = ctypes.create_string_buffer(500)   
     lib.get_id.argtypes = [ctypes.c_void_p, ctypes.c_char_p, ctypes.c_size_t]
     lib.get_id(task, task_id, ctypes.sizeof(task_id))
     lib.get_text.argtypes = [ctypes.c_void_p, ctypes.c_char_p, ctypes.c_size_t]
@@ -80,48 +80,48 @@ def print_info(task):
 
 # добавить в планировщик задание
 def add_to_sched(scheduler):
-    data = [0] * 4
+    data = [0] * 2
     print("Enter task ID: ")
-    data[0] = input()
+    data_id = input()
     print("Enter text of task: ")
-    data[1] = input()
+    data_text = input()
     try:
-        print("Enter deadline: ")
-        data[2] = int(input())
-        print("Enter importance level: ")
-        data[3] = int(input())
+        print("Enter deadline (number of seconds): ")
+        data[0] = int(input())
+        print("Enter importance level (integer - the greater the value, the more important the task): ")
+        data[1] = int(input())
     except:
         print("Error: invalid number entered.")
         return
     try:
-        name = ctypes.c_char_p(data[0].encode('utf-8'))
-        text = ctypes.c_char_p(data[1].encode('utf-8'))
-        t = lib.createTask(name, text, data[2], data[3])
+        name = ctypes.c_char_p(data_id.encode('utf-8'))
+        text = ctypes.c_char_p(data_text.encode('utf-8'))
+        t = lib.createTask(name, text, data[0], data[1])
         lib.add_task(t, scheduler)
     except:
         print("Error.")
 
 # добавить в планировщик периодическое задание
 def add_periodic_to_sched(scheduler):
-    data = [0] * 5
+    data = [0] * 3
     print("Enter task ID: ")
-    data[0] = input()
+    data_id = input()
     print("Enter text of task: ")
-    data[1] = input()
+    data_text = input()
     try:
-        print("Enter deadline: ")
+        print("Enter deadline (number of seconds): ")
+        data[0] = int(input())
+        print("Enter importance level (integer - the greater the value, the more important the task): ")
+        data[1] = int(input())
+        print("Enter period (number of seconds): ")
         data[2] = int(input())
-        print("Enter importance level: ")
-        data[3] = int(input())
-        print("Enter period: ")
-        data[4] = int(input())
     except:
         print("Error: invalid number entered.")
         return
     try:
-        name = ctypes.c_char_p(data[0].encode('utf-8'))
-        text = ctypes.c_char_p(data[1].encode('utf-8'))
-        t = lib.createPeriodicTask(name, text, data[2], data[3], data[4])
+        name = ctypes.c_char_p(data_id.encode('utf-8'))
+        text = ctypes.c_char_p(data_text.encode('utf-8'))
+        t = lib.createPeriodicTask(name, text, data[0], data[1], data[2])
         lib.add_task(t, scheduler)
     except:
         print("Error.")
@@ -182,6 +182,8 @@ def menu(scheduler):
          elif (choice == 7):
             if (sched_flag == True):
                 run_exec(schedule)
+            else:
+                print("Error: no schedule exists.")
 
             
          elif (choice == 8):
